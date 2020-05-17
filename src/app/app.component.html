@@ -1,0 +1,4 @@
+<input type="file" (change)="onUpload($event)"/>
+<ng-container *ngIf="encoding">
+  <p>File encoding is: {{ encoding }}</p>
+</ng-container>

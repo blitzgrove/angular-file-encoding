@@ -2,3 +2,16 @@
 <ng-container *ngIf="encoding">
   <p>File encoding is: {{ encoding }}</p>
 </ng-container>
+
+<ng-container *ngIf="lines.length > 1">
+  <pre>
+    <ng-container *ngFor="let line of lines; let i=index">
+      <ng-container *ngIf="line.span; else noSpan">
+        <span>{{ line.line }}</span>
+      </ng-container>
+      <ng-template #noSpan>
+        {{ line.line }}
+      </ng-template>
+    </ng-container>
+  </pre>
+</ng-container>

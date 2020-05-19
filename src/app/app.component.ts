@@ -11,6 +11,8 @@ export const Encoding = require('encoding-japanese');
 })
 export class AppComponent  {
   encoding: string;
+  lines: { line: string, span: boolean }[] = [];
+  lineHighlight = [2, 4];
 
   constructor() { }
 
@@ -29,9 +31,14 @@ export class AppComponent  {
 
     this.readFileContent(event.currentTarget.files[0]).subscribe(
       content => {
-        for(const line of content.split(/[\r\n]+/)) {
-          if (line !== '') {
-            console.log(line);
+        const lines = content.split(/[\r\n]+/);
+        for(const lineIndex in lines) {
+          if (lines[lineIndex] !== '') {
+            if (this.isInArray((Number(lineIndex) + 1), this.lineHighlight)) {
+              this.lines.push({ span: true, line: lines[lineIndex]});
+            } else {
+              this.lines.push({ span: false, line: lines[lineIndex]});
+            }
           }
         }
       }
@@ -44,7 +51,6 @@ export class AppComponent  {
     const reader = new FileReader();
     reader.onload = (e) => {
       const codes = new Uint8Array(e.target.result as ArrayBuffer);
-      console.log(codes);
       const detectedEncoding = Encoding.detect(codes);
       result.next(detectedEncoding);
     };
@@ -65,5 +71,9 @@ export class AppComponent  {
     reader.readAsText(file);
 
     return result.asObservable();
+  }
+
+  private isInArray(value, array) {
+    return array.indexOf(value) > -1;
   }
 }

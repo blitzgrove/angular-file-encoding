@@ -1,3 +1,19 @@
 p {
   font-family: Lato;
 }
+
+pre span {
+  background-color: red;
+}
+
+pre {
+  background: #555;
+  background-image: -webkit-linear-gradient(#555 50%, #505050 50%);
+  background-image:    -moz-linear-gradient(#555 50%, #505050 50%);
+  background-image:     -ms-linear-gradient(#555 50%, #505050 50%);
+  background-image:      -o-linear-gradient(#555 50%, #505050 50%);
+  background-image:         linear-gradient(#555 50%, #505050 50%);
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 4.5em 4.5em;
+}
